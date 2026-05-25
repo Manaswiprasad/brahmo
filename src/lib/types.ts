@@ -50,3 +50,13 @@ export interface SafetyCheckResult {
   eGFR?: number;
   cha2ds2Vasc?: number;
 }
+
+export interface ClinicalNote {
+  id: string;
+  patientId: string;
+  timestamp: string;
+  author: string;
+  noteText: string;
+  category: 'SOAP' | 'Prescription' | 'Progress' | 'Discharge';
+}
+

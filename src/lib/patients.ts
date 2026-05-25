@@ -3,7 +3,7 @@ import { Patient } from './types';
 export const PATIENTS: Patient[] = [
   {
     id: "1",
-    name: "Patient 1 (Demo)",
+    name: "Arthur Pendelton (CKD & T2DM)",
     age: 65,
     sex: "M",
     medications: ["metformin", "glimepiride", "telmisartan", "atorvastatin"],
@@ -16,7 +16,7 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "2",
-    name: "Patient 2",
+    name: "Eleanor Vance (Post-Op)",
     age: 58,
     sex: "F",
     medications: ["enoxaparin", "paracetamol", "tramadol", "pantoprazole"],
@@ -28,7 +28,7 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "3",
-    name: "Patient 3 (Demo)",
+    name: "George Abernathy (Geriatric Polypharmacy & UTI)",
     age: 78,
     sex: "M",
     medications: ["amlodipine", "telmisartan", "metformin", "glimepiride", "atorvastatin", "aspirin", "pantoprazole", "escitalopram", "tamsulosin", "paracetamol", "diclofenac", "calcium"],
@@ -40,7 +40,7 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "4",
-    name: "Patient 4",
+    name: "Leo Carter (Pediatric Epilepsy)",
     age: 6,
     sex: "M",
     medications: ["sodium valproate", "levetiracetam"],
@@ -52,7 +52,7 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "5",
-    name: "Patient 5",
+    name: "Frank Russo (End-Stage Renal)",
     age: 62,
     sex: "M",
     medications: ["furosemide", "carvedilol", "amlodipine", "erythropoietin", "calcium"],
@@ -64,7 +64,7 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "6",
-    name: "Patient 6",
+    name: "Clara Bennett (Gestational Hypertension)",
     age: 28,
     sex: "F",
     medications: ["methyldopa", "folic acid", "iron"],
@@ -76,7 +76,7 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "7",
-    name: "Patient 7 (Demo)",
+    name: "Elena Rostova (ICU Severe Sepsis)",
     age: 35,
     sex: "F",
     medications: ["meropenem", "noradrenaline", "insulin", "enoxaparin", "pantoprazole"],
@@ -89,19 +89,19 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "8",
-    name: "Patient 8 (Demo)",
+    name: "Thomas Sterling (AFib & Stroke Risk)",
     age: 68,
     sex: "M",
     medications: ["warfarin", "bisoprolol", "ramipril", "atorvastatin", "furosemide", "spironolactone"],
     allergies: ["NKDA"],
-    creatinine: 1.1, // Not provided, but eGFR is 62
+    creatinine: 1.1,
     conditions: ["AF", "HF", "CHF", "HTN", "T2DM", "TIA"],
     labs: { INR: 2.8, eGFR: 62, K: 4.9, BNP: 450 },
     summary: "68M | Meds: Warfarin 5mg, Bisoprolol 5mg, Ramipril 5mg, Atorvastatin 80mg, Furosemide 40mg, Spironolactone 25mg | Allergy: NKDA | Conditions: AF, HF (EF 35%), HTN, T2DM, Previous TIA (2022) | INR 2.8, eGFR 62, K+ 4.9, BNP 450"
   },
   {
     id: "9",
-    name: "Patient 9",
+    name: "Samuel Choi (Diabetic Neuropathy)",
     age: 55,
     sex: "M",
     medications: ["metformin", "empagliflozin", "insulin glargine", "pregabalin", "duloxetine", "aspirin"],
@@ -113,7 +113,7 @@ export const PATIENTS: Patient[] = [
   },
   {
     id: "10",
-    name: "Patient 10",
+    name: "Julian Brooks (Pediatric Asthma)",
     age: 10,
     sex: "M",
     medications: ["salbutamol", "fluticasone", "montelukast"],

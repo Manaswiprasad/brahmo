@@ -43,37 +43,40 @@ export default function CustomPatientForm({ onAddPatient }: CustomPatientFormPro
   };
 
   return (
-    <div>
+    <div className="w-full">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full mt-3 py-2 px-4 bg-purple-600/30 hover:bg-purple-600/50 text-purple-300 font-medium rounded-lg transition-colors border border-purple-500/30 text-sm flex items-center justify-center gap-2"
+        className="w-full py-3 px-4 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 font-semibold rounded-lg transition-all border border-indigo-500/30 text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-950/20"
       >
-        <span>➕</span> {isOpen ? 'Cancel' : 'Add Custom Patient'}
+        <span>{isOpen ? '❌' : '➕'}</span>
+        <span>{isOpen ? 'Cancel Intake' : 'Intake New Patient Profile'}</span>
       </button>
 
       {isOpen && (
-        <form onSubmit={handleSubmit} className="mt-4 space-y-3 glass-panel p-4 border-purple-500/20">
-          <h3 className="font-bold text-purple-300 text-sm uppercase tracking-wide">New Custom Patient</h3>
+        <form onSubmit={handleSubmit} className="mt-4 space-y-4 glass-panel p-5 border-indigo-500/20">
+          <h3 className="font-bold text-indigo-300 text-sm uppercase tracking-wide flex items-center gap-2 border-b border-indigo-500/10 pb-2">
+            👤 New Intake Profile
+          </h3>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Patient Name *</label>
+              <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Patient Name *</label>
               <input
                 required
                 type="text"
-                placeholder="e.g. John Doe"
-                className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500"
+                placeholder="e.g. Arthur Pendelton"
+                className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors"
                 value={form.name}
                 onChange={e => setForm({...form, name: e.target.value})}
               />
             </div>
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Age *</label>
+              <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Age *</label>
               <input
                 required
                 type="number"
                 placeholder="e.g. 65"
-                className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500"
+                className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors"
                 value={form.age}
                 onChange={e => setForm({...form, age: e.target.value})}
               />
@@ -82,23 +85,23 @@ export default function CustomPatientForm({ onAddPatient }: CustomPatientFormPro
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Sex</label>
+              <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Sex</label>
               <select
-                className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500"
+                className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors"
                 value={form.sex}
                 onChange={e => setForm({...form, sex: e.target.value})}
               >
-                <option value="M">Male</option>
-                <option value="F">Female</option>
+                <option value="M" className="bg-gray-900">Male</option>
+                <option value="F" className="bg-gray-900">Female</option>
               </select>
             </div>
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Creatinine (mg/dL)</label>
+              <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Creatinine (mg/dL)</label>
               <input
                 type="number"
                 step="0.1"
                 placeholder="e.g. 1.2"
-                className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500"
+                className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors"
                 value={form.creatinine}
                 onChange={e => setForm({...form, creatinine: e.target.value})}
               />
@@ -106,44 +109,44 @@ export default function CustomPatientForm({ onAddPatient }: CustomPatientFormPro
           </div>
 
           <div>
-            <label className="block text-xs text-gray-400 mb-1">eGFR (if known)</label>
+            <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">eGFR (mL/min)</label>
             <input
               type="number"
               step="0.1"
-              placeholder="e.g. 45 — or leave blank to auto-calculate"
-              className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500"
+              placeholder="Leave blank to auto-calculate via CKD-EPI"
+              className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors"
               value={form.egfr}
               onChange={e => setForm({...form, egfr: e.target.value})}
             />
           </div>
 
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Current Medications (comma-separated)</label>
+            <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Current Medications (comma-separated)</label>
             <textarea
-              placeholder="e.g. Metformin, Atorvastatin, Warfarin"
-              className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500 h-16 resize-none"
+              placeholder="e.g. Metformin, Atorvastatin, Telmisartan"
+              className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors h-16 resize-none"
               value={form.medications}
               onChange={e => setForm({...form, medications: e.target.value})}
             />
           </div>
 
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Allergies (comma-separated, write NKDA if none)</label>
+            <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Allergies (comma-separated)</label>
             <input
               type="text"
-              placeholder="e.g. Penicillin (ANAPHYLAXIS), Sulfonamide"
-              className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500"
+              placeholder="e.g. Penicillin (anaphylaxis), Sulfonamide (rash)"
+              className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors"
               value={form.allergies}
               onChange={e => setForm({...form, allergies: e.target.value})}
             />
           </div>
 
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Medical Conditions (comma-separated)</label>
+            <label className="block text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">Co-existing Conditions (comma-separated)</label>
             <input
               type="text"
-              placeholder="e.g. AF, HTN, T2DM, CHF, TIA"
-              className="w-full bg-black/30 border border-gray-700 rounded-lg p-2 text-sm text-gray-200 outline-none focus:border-purple-500"
+              placeholder="e.g. AF, CHF, T2DM, HTN"
+              className="w-full bg-black/40 border border-gray-700 rounded-lg p-2.5 text-sm text-gray-200 outline-none focus:border-indigo-500 transition-colors"
               value={form.conditions}
               onChange={e => setForm({...form, conditions: e.target.value})}
             />
@@ -151,9 +154,9 @@ export default function CustomPatientForm({ onAddPatient }: CustomPatientFormPro
 
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-purple-600 hover:bg-purple-500 text-white font-medium rounded-lg transition-colors text-sm"
+            className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg transition-all shadow-lg shadow-indigo-500/20 text-sm"
           >
-            ✅ Add Patient to Demo
+            ✅ Initialize Intake Profile
           </button>
         </form>
       )}

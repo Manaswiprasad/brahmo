@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface ResponseComparisonProps {
   genericResponse: string;
@@ -24,11 +24,11 @@ export default function ResponseComparison({
       <div className="glass-panel overflow-hidden flex flex-col h-full border-gray-700">
         <div className="bg-gray-800/50 p-4 border-b border-gray-700">
           <h3 className="font-bold text-gray-300 flex items-center">
-            <span className="mr-2 opacity-50">🤖</span> Generic AI (Unsafe)
+            <span className="mr-2 opacity-50">🤖</span> Standard LLM (No Safety Layer)
           </h3>
-          <p className="text-xs text-gray-500 mt-1">Prompt: Patient Data + Question only</p>
+          <p className="text-xs text-gray-500 mt-1">Prompt: Patient Profile + Medical Query only</p>
         </div>
-        <div className="p-6 flex-grow whitespace-pre-wrap text-sm text-gray-300">
+        <div className="p-6 flex-grow text-sm text-gray-300 leading-relaxed overflow-y-auto max-h-[600px] custom-markdown">
           {isLoadingGeneric ? (
             <div className="animate-pulse space-y-2">
               <div className="h-4 w-3/4 bg-gray-700 rounded"></div>
@@ -36,9 +36,9 @@ export default function ResponseComparison({
               <div className="h-4 w-5/6 bg-gray-700 rounded"></div>
             </div>
           ) : genericResponse ? (
-            genericResponse
+            <ReactMarkdown>{genericResponse}</ReactMarkdown>
           ) : (
-            <span className="text-gray-600 italic">Waiting for request...</span>
+            <span className="text-gray-600 italic">Console idle. Awaiting query execution...</span>
           )}
         </div>
       </div>
@@ -47,11 +47,11 @@ export default function ResponseComparison({
       <div className="glass-panel overflow-hidden flex flex-col h-full border-blue-900/30">
         <div className="bg-blue-900/20 p-4 border-b border-blue-800/30">
           <h3 className="font-bold text-blue-300 flex items-center">
-            <span className="mr-2">🛡️</span> BRAHMO Enhanced AI (Safe)
+            <span className="mr-2">🛡️</span> BRAHMO Enhanced AI (Clinically Guarded)
           </h3>
-          <p className="text-xs text-blue-500/70 mt-1">Prompt: Safety Constraints + Patient Data + Question</p>
+          <p className="text-xs text-blue-500/70 mt-1">Prompt: Deterministic Constraints + Patient Profile + Medical Query</p>
         </div>
-        <div className="p-6 flex-grow whitespace-pre-wrap text-sm text-blue-100">
+        <div className="p-6 flex-grow text-sm text-blue-100 leading-relaxed overflow-y-auto max-h-[600px] custom-markdown">
           {isLoadingEnhanced ? (
             <div className="animate-pulse space-y-2">
               <div className="h-4 w-3/4 bg-blue-900/40 rounded"></div>
@@ -59,9 +59,9 @@ export default function ResponseComparison({
               <div className="h-4 w-5/6 bg-blue-900/40 rounded"></div>
             </div>
           ) : enhancedResponse ? (
-            enhancedResponse
+            <ReactMarkdown>{enhancedResponse}</ReactMarkdown>
           ) : (
-             <span className="text-blue-900/50 italic">Waiting for request...</span>
+             <span className="text-blue-900/50 italic">Console idle. Awaiting safety-enhanced query...</span>
           )}
         </div>
       </div>

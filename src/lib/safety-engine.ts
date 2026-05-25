@@ -2,6 +2,8 @@ import { supabase } from './supabase';
 import { Drug, DrugInteraction, Patient, SafetyCheckResult, SafetyAlert, AllergyCrossReactivity } from './types';
 import { calculateEGFR, calculateCha2ds2Vasc } from './calculators';
 
+import { mockDrugs, mockInteractions, mockAllergies } from './mockData';
+
 // In-memory cache for deterministic checks under 100ms
 let drugsCache: Map<string, Drug> | null = null;
 let interactionsCache: DrugInteraction[] | null = null;
@@ -10,11 +12,30 @@ let allergiesCache: AllergyCrossReactivity[] | null = null;
 async function ensureCache() {
   if (drugsCache && interactionsCache && allergiesCache) return;
 
-  const [{ data: drugs }, { data: interactions }, { data: allergies }] = await Promise.all([
-    supabase.from('drugs').select('*'),
-    supabase.from('drug_interactions').select('*'),
-    supabase.from('allergy_cross_reactivity').select('*')
-  ]);
+  let drugs: any[] = [];
+  let interactions: any[] = [];
+  let allergies: any[] = [];
+
+  try {
+    const [drugsRes, interactionsRes, allergiesRes] = await Promise.all([
+      supabase.from('drugs').select('*'),
+      supabase.from('drug_interactions').select('*'),
+      supabase.from('allergy_cross_reactivity').select('*')
+    ]);
+
+    if (!drugsRes.error && drugsRes.data && drugsRes.data.length > 0) {
+      drugs = drugsRes.data;
+      interactions = interactionsRes.data || [];
+      allergies = allergiesRes.data || [];
+    } else {
+      throw new Error('Supabase fetch failed or returned empty data');
+    }
+  } catch (err) {
+    console.warn('Falling back to local mock data due to Supabase error:', err);
+    drugs = mockDrugs;
+    interactions = mockInteractions;
+    allergies = mockAllergies;
+  }
 
   drugsCache = new Map((drugs || []).map(d => [d.generic_name_normalized.toLowerCase(), d]));
   interactionsCache = interactions || [];
