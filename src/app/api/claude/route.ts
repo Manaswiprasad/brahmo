@@ -73,17 +73,39 @@ export async function POST(req: Request) {
 
       const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-      const response = await fetch(geminiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody),
-      });
+      let response;
+      let data;
+      let retries = 3;
+      let delay = 1000;
 
-      const data = await response.json();
+      while (retries > 0) {
+        response = await fetch(geminiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody),
+        });
 
-      if (!response.ok) {
-        const errMsg = data?.error?.message || JSON.stringify(data);
-        throw new Error(`Gemini API Error ${response.status}: ${errMsg}`);
+        data = await response.json();
+
+        if (response.ok) {
+          break; // Success
+        }
+
+        // Only retry on 503 Service Unavailable or 429 Too Many Requests
+        if (response.status === 503 || response.status === 429) {
+          retries--;
+          if (retries === 0) {
+            const errMsg = data?.error?.message || JSON.stringify(data);
+            throw new Error(`Gemini API Error ${response.status}: ${errMsg} (After retries)`);
+          }
+          console.warn(`Gemini API ${response.status}. Retrying in ${delay}ms...`);
+          await new Promise(res => setTimeout(res, delay));
+          delay *= 2; // Exponential backoff
+        } else {
+          // Break immediately for other errors (e.g., 400 Bad Request)
+          const errMsg = data?.error?.message || JSON.stringify(data);
+          throw new Error(`Gemini API Error ${response.status}: ${errMsg}`);
+        }
       }
 
       llmResponseText =
