@@ -67,5 +67,8 @@ Instead of asking an LLM, "Is it safe to give this patient Amoxicillin?", the sy
 5. **Open the application:**
    Navigate to [http://localhost:3000](http://localhost:3000) in your browser.
 
+6. **Deployed project:**
+   Navigate to [https://brahmo-fawn.vercel.app?_vercel_share=tdDeMukqRm371GJpbCMuAq6qlrx1w8qx]
+
 ---
 *Developed as a demonstration of clinically safe, deterministic AI architectures for modern healthcare applications.*
