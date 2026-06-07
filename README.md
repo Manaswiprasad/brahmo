@@ -25,6 +25,7 @@ Instead of asking an LLM, "Is it safe to give this patient Amoxicillin?", the sy
 ## 🚀 Key Features
 *   **Real-time Clinical Guardrails:** Instantly flags severe interactions, renal dosing failures, and allergy cross-reactivities.
 *   **Dual-Column Comparison UI:** Visually demonstrates the difference between a standard "unguarded" LLM and the BRAHMO Enhanced AI, proving the necessity of the deterministic layer.
+*   **Interactive AR Neurological Mapping:** Fully embedded WebXR Augmented Reality viewer using `@google/model-viewer`. Visualize immediate severe drug reactions (like Serotonin Toxicity) directly on a 3D anatomical brain stem model using glowing AR hotspots.
 *   **Premium Medical Interface:** Built with Next.js, Tailwind CSS, and Framer Motion for a sleek, glassmorphic, and highly responsive user experience.
 *   **Resilient API Design:** Includes automatic exponential backoff retry logic to handle upstream LLM API rate limits (e.g., 503 Service Unavailable) seamlessly without breaking the user experience.
 

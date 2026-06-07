@@ -7,6 +7,7 @@ import { PATIENTS } from '@/lib/patients';
 import { Patient, SafetyCheckResult } from '@/lib/types';
 import SafetyAlerts from '@/components/SafetyAlerts';
 import ResponseComparison from '@/components/ResponseComparison';
+import MedicalARViewer from '@/components/MedicalARViewer';
 
 function ConsultationContent() {
   const searchParams = useSearchParams();
@@ -15,6 +16,7 @@ function ConsultationContent() {
   // Load patient from reference case archive
   const patient = PATIENTS.find(p => p.id === patientId) || PATIENTS[0];
 
+  const [showAR, setShowAR] = useState(false);
   const [question, setQuestion] = useState<string>('');
   const [proposedDrug, setProposedDrug] = useState<string>('');
 
@@ -295,6 +297,61 @@ function ConsultationContent() {
           isLoadingGeneric={isLoadingGeneric}
           isLoadingEnhanced={isLoadingEnhanced}
         />
+
+        {/* AR Integration for Nervous System Reactions */}
+        {(enhancedResponse || genericResponse) && (
+          <div className="mt-8 border-t border-white/10 pt-8">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                  <span>🥽</span> AR Neurological Reactions
+                </h3>
+                <p className="text-sm text-gray-400 mt-1">
+                  Visualize immediate systemic drug effects on the central nervous system in Augmented Reality.
+                </p>
+              </div>
+              <button 
+                onClick={() => setShowAR(!showAR)}
+                className={`px-6 py-2.5 rounded-full font-bold transition-all shadow-lg ${showAR ? 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30' : 'bg-purple-600 text-white hover:bg-purple-500 shadow-purple-500/25'}`}
+              >
+                {showAR ? 'Hide AR Visualization' : 'Launch AR Visualization'}
+              </button>
+            </div>
+
+            {showAR && (
+              <div className="animate-fade-in-up">
+                <MedicalARViewer 
+                  modelSrc="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BrainStem/glTF-Binary/BrainStem.glb"
+                  title="Serotonin Syndrome Reactions"
+                  description="Interactive mapping of severe neurological symptoms across the brain stem and spinal pathways."
+                  hotspots={[
+                    {
+                      id: "midbrain",
+                      position: "0 0.05 0.02",
+                      normal: "0 1 0",
+                      title: "Midbrain & Thalamus",
+                      description: "Cognitive Effects: Rapid onset of confusion, severe agitation, and delirium due to serotonin toxicity."
+                    },
+                    {
+                      id: "medulla",
+                      position: "0 -0.05 -0.03",
+                      normal: "0 0 -1",
+                      title: "Medulla Oblongata",
+                      description: "Autonomic Instability: Tachycardia, dangerous blood pressure spikes, and hyperthermia."
+                    },
+                    {
+                      id: "spinal",
+                      position: "0 -0.15 -0.02",
+                      normal: "0 -1 0",
+                      title: "Spinal Cord Tracts",
+                      description: "Neuromuscular Hyperactivity: Myoclonus (muscle twitching), hyperreflexia, and dangerous muscle rigidity."
+                    }
+                  ]}
+                />
+              </div>
+            )}
+          </div>
+        )}
 
       </div>
     </div>

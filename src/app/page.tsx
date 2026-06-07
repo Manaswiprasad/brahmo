@@ -150,22 +150,30 @@ export default function Home() {
             <div className="border-t border-white/5 my-5"></div>
 
             {/* Premium Action Workspace Router Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               
               <Link 
                 href={`/consultation?patientId=${patient.id}`}
-                className="py-3.5 px-4 bg-blue-600 hover:bg-blue-500 active:scale-98 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/25 text-xs tracking-wider uppercase flex items-center justify-center gap-2"
+                className="py-3.5 px-3 bg-blue-600 hover:bg-blue-500 active:scale-98 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-500/25 text-[11px] tracking-wider uppercase flex flex-col items-center justify-center gap-1 text-center"
               >
-                <span>🛡️</span>
-                <span>Open Consultation Console</span>
+                <span className="text-xl mb-1">🛡️</span>
+                <span>Open Consultation</span>
               </Link>
 
               <Link 
                 href={`/records?patientId=${patient.id}`}
-                className="py-3.5 px-4 bg-indigo-600/30 hover:bg-indigo-600/40 text-indigo-300 border border-indigo-500/30 active:scale-98 font-bold rounded-lg transition-all shadow-lg shadow-indigo-950/20 text-xs tracking-wider uppercase flex items-center justify-center gap-2"
+                className="py-3.5 px-3 bg-indigo-600/30 hover:bg-indigo-600/40 text-indigo-300 border border-indigo-500/30 active:scale-98 font-bold rounded-lg transition-all shadow-lg shadow-indigo-950/20 text-[11px] tracking-wider uppercase flex flex-col items-center justify-center gap-1 text-center"
               >
-                <span>📂</span>
-                <span>Open EMR Case Notes</span>
+                <span className="text-xl mb-1">📂</span>
+                <span>Open EMR Notes</span>
+              </Link>
+
+              <Link 
+                href="/ar-viewer"
+                className="py-3.5 px-3 bg-purple-600/30 hover:bg-purple-600/40 text-purple-300 border border-purple-500/30 active:scale-98 font-bold rounded-lg transition-all shadow-lg shadow-purple-950/20 text-[11px] tracking-wider uppercase flex flex-col items-center justify-center gap-1 text-center"
+              >
+                <span className="text-xl mb-1">🥽</span>
+                <span>AR Anatomy Viewer</span>
               </Link>
 
             </div>
